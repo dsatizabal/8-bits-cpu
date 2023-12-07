@@ -1,8 +1,8 @@
-CARAVEL_ROOT: /usr/caravel_user_project/caravel
-MCW_ROOT: /usr/caravel_user_project/mgmt_core_wrapper
-PDK: sky130A
-PDK_ROOT: /usr/pdk
-USER_PROJECT_ROOT: /usr/caravel_user_project
+CARAVEL_ROOT: /home/dsatizabal/gf180/asic/caravel
+MCW_ROOT: /home/dsatizabal/gf180/asic/caravel_mgmt_soc_gf180mcu
+PDK: gf180mcuD
+PDK_ROOT: /home/dsatizabal/gf180/asic/pdk
+USER_PROJECT_ROOT: /home/dsatizabal/gf180/8-bits-cpu
 caravan: false
 clk: 25
 emailto:

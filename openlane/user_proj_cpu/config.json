@@ -1,15 +1,21 @@
 {
-    "DESIGN_NAME": "user_proj_example",
+    "ROUTING_CORES": 7,
+    "DESIGN_NAME": "user_proj_cpu",
     "DESIGN_IS_CORE": 0,
     "VERILOG_FILES": [
         "dir::../../verilog/rtl/defines.v",
-        "dir::../../verilog/rtl/user_proj_example.v"
+        "dir::../../verilog/rtl/user_proj_cpu.v",
+        "dir::../../verilog/rtl/cpuy.v",
+        "dir::../../verilog/rtl/alu.v",
+        "dir::../../verilog/rtl/stack.v",
+        "dir::../../verilog/rtl/timer.v",
+        "dir::../../verilog/rtl/ucode.v"
     ],
     "CLOCK_PERIOD": 25,
     "CLOCK_PORT": "wb_clk_i",
-    "CLOCK_NET": "counter.clk",
+    "CLOCK_NET": "cpuy.clk",
     "FP_SIZING": "absolute",
-    "DIE_AREA": "0 0 2800 1760",
+    "DIE_AREA": "0 0 1500 1500",
     "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
     "MAX_TRANSITION_CONSTRAINT": 1.0,
     "MAX_FANOUT_CONSTRAINT": 16,
@@ -30,7 +36,7 @@
         "vssd1"
     ],
     "IO_SYNC": 0,
-    "BASE_SDC_FILE": "dir::base_user_proj_example.sdc",
+    "BASE_SDC_FILE": "dir::base_user_proj_cpu.sdc",
     "RUN_CVC": 1,
     "pdk::sky130*": {
         "FP_CORE_UTIL": 45,

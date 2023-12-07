@@ -15,6 +15,10 @@
 
 # Caravel user project includes
 -v $(USER_PROJECT_VERILOG)/rtl/user_project_wrapper.v	     
--v $(USER_PROJECT_VERILOG)/rtl/user_proj_example.v
+-v $(USER_PROJECT_VERILOG)/rtl/user_proj_cpu.v
 
- 
+-v $(USER_PROJECT_VERILOG)/rtl/cpuy.v
+-v $(USER_PROJECT_VERILOG)/rtl/alu.v
+-v $(USER_PROJECT_VERILOG)/rtl/stack.v
+-v $(USER_PROJECT_VERILOG)/rtl/timer.v
+-v $(USER_PROJECT_VERILOG)/rtl/ucode.v
