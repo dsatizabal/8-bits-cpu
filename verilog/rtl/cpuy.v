@@ -20,10 +20,10 @@ module cpuy(
 
 	// TODO: Port cfg insntruction, and how to read from propper source according to por cfg
 	assign p0out = ports[0];
-	assign p1out = ports[1];
+	assign p1out = ports[1][3.0];
 
 	assign p0cfg = ports_cfg[0];
-	assign p1cfg = ports_cfg[1];
+	assign p1cfg = ports_cfg[1][3:0];
 
 	// Some internal parameters definitions
 	localparam 		RAM_SIZE = 256;
@@ -174,6 +174,7 @@ module cpuy(
 	reg stack_direction_ucode;
 	reg destination_cpu_config_ucode;
 	reg destination_timer_config_ucode;
+	reg destination_ports_config_ucode;
 	reg source_operands_ucode;
 
 	ucode ucode (
@@ -200,6 +201,7 @@ module cpuy(
 		.stack_direction (stack_direction_ucode),
 		.destination_cpu_config (destination_cpu_config_ucode),
 		.destination_timer_config (destination_timer_config_ucode),
+		.destination_ports_config (destination_ports_config_ucode),
 		.source_operands(source_operands_ucode)
 	);
 
@@ -391,9 +393,18 @@ module cpuy(
 							set_t1 <= w[4];
 						end
 
+						if (destination_ports_config_ucode) begin
+							ports_cfg[0] <= register[0];
+							ports_cfg[1] <= register[1][3:0];
+						end
+
 						if (destination_w_ucode) begin
 							if (source_ports_ucode) begin
-								w <= ports[destination_index_ucode];
+								if (destination_index_ucode == 3'b000) begin
+									w <= ((p0in & ports_cfg[0]) | (ports[0] & ~ports_cfg[0]));
+								end else begin
+									w <= (( { 4'b0000, p1in } & ports_cfg[1]) | ( { 4'b0000, ports[1][3:0] } & ~ports_cfg[1]));
+								end
 							end else if (source_registers_ucode) begin
 								w <= registers[destination_index_ucode];
 							end else if (destination_memory_ucode) begin

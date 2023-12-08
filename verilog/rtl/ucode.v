@@ -26,6 +26,7 @@ module ucode (
     output wire stack_direction, // 0 Pop, 1 Push
 	output wire destination_cpu_config,
 	output wire destination_timer_config,
+	output wire destination_ports_config,
 	output wire source_operands
 );
 	reg alu_op;
@@ -47,6 +48,7 @@ module ucode (
     reg stack_dir;
 	reg dst_cpu_cfg;
 	reg dst_tmr_cfg;
+	reg dst_ports_cfg;
 	reg src_op;
 
     assign alu_operation = alu_op;
@@ -68,6 +70,7 @@ module ucode (
     assign stack_direction = stack_dir;
 	assign destination_cpu_config = dst_cpu_cfg;
 	assign destination_timer_config = dst_tmr_cfg;
+	assign destination_ports_config = dst_ports_cfg;
 	assign source_operands = src_op;
 
 	always @(*) begin
@@ -90,6 +93,7 @@ module ucode (
 		stack_dir = 0;
 		dst_cpu_cfg = 0;
 		dst_tmr_cfg = 0;
+		dst_ports_cfg = 0;
 		src_op = 0;
 
 		case (opcode)
@@ -254,12 +258,14 @@ module ucode (
 			// end
 			// 8'b0011_1011: begin
 			// end
-			// 8'b0011_1100: begin
-			// end
 
-			8'b0011_1101: begin // Ret
+			8'b0011_1100: begin
 				stack_op = 1;
 				stack_dir = 0;
+			end
+			8'b0011_1101: begin // Ret
+				mov_op = 1;
+				dst_ports_cfg = 1;
 			end
 			8'b0011_1110: begin // CpuCfg
 				mov_op = 1;
