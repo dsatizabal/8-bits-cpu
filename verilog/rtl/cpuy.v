@@ -1,6 +1,4 @@
 `default_nettype none
-`timescale 1ns/1ns
-`define Proteus
 
 // A simple 8-bits CPU with timer and interrupt support using external ROM
 module cpuy(
@@ -20,10 +18,10 @@ module cpuy(
 
 	// TODO: Port cfg insntruction, and how to read from propper source according to por cfg
 	assign p0out = ports[0];
-	assign p1out = ports[1][3.0];
+	assign p1out = ports[1];
 
 	assign p0cfg = ports_cfg[0];
-	assign p1cfg = ports_cfg[1][3:0];
+	assign p1cfg = ports_cfg[1];
 
 	// Some internal parameters definitions
 	localparam 		RAM_SIZE = 256;
@@ -70,7 +68,7 @@ module cpuy(
 	reg		[7:0] 	registers	[7:0];
 
 	// 256 bytes memory bank
-	reg 	[0:7] 	ram[RAM_SIZE - 1:0];
+	reg 	[7:0] 	ram[RAM_SIZE - 1:0];
 
 	reg		[7:0]   op_code;
 	reg		[1:0]   operands_count;
@@ -182,6 +180,7 @@ module cpuy(
 		.w (w),
 		.carry (flags[0]),
 		.zero (flags[1]),
+		.sign(flags[2]),
 		.alu_operation (alu_operation_ucode),
 		.alu_multibyte_result (alu_multibyte_result_ucode),
 		.jump_operation (jump_operation_ucode),
@@ -394,8 +393,8 @@ module cpuy(
 						end
 
 						if (destination_ports_config_ucode) begin
-							ports_cfg[0] <= register[0];
-							ports_cfg[1] <= register[1][3:0];
+							ports_cfg[0] <= registers[0];
+							ports_cfg[1] <= registers[1];
 						end
 
 						if (destination_w_ucode) begin

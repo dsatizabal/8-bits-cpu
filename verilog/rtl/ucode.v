@@ -1,5 +1,4 @@
 `default_nettype none
-`timescale 1ns/1ns
 
 module ucode (
     input wire [7:0] opcode,
@@ -542,12 +541,12 @@ module ucode (
 			end
 			8'b1000_0110: begin // MovLM
 				mov_op = 1;
-				src_op <= 1;
+				src_op = 1;
 				dst_memory = 1;
 			end
 			8'b1000_0111: begin // MovLM
 				mov_op = 1;
-				src_op <= 1;
+				src_op = 1;
 				dst_memory = 1;
 			end
 			8'b1000_1000: begin // AddLW

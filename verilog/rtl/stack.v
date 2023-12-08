@@ -1,5 +1,4 @@
 `default_nettype none
-`timescale 1ns/1ns
 
 module stack (
     input wire clk,
@@ -19,7 +18,7 @@ module stack (
 	reg [ADDR_WIDTH - 1:0] stack_ptr = 0;
 
 	// Full and empty flag logic
-	assign full = (stack_ptr == DEPTH - 1);
+	assign full = (stack_ptr == (DEPTH - 1));
 	assign empty = (stack_ptr == 0);
 
 	always @(posedge clk or posedge rst) begin

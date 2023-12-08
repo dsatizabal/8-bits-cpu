@@ -1,8 +1,6 @@
 `default_nettype none
-`timescale 1ns/1ns
 
 module alu (
-    input wire rst,
     input wire enable,
     input wire [7:0] operation,
     input wire [7:0] op1,
@@ -39,12 +37,12 @@ module alu (
 				1'b1: begin // Operations with 2 operands
 					case (operation[6:1])
 						6'b00_0100: begin // Add L2W
-							if ((op1 + op2 + cpu_carry) > 255) ca = 1;
-							res_l = (op1 + op2 + cpu_carry);
+							if ((op1 + op2 + { 7'b0000000, cpu_carry }) > 255) ca = 1;
+							res_l = (op1 + op2 + { 7'b0000000, cpu_carry });
 						end
 						6'b00_0101: begin // Add M2W
-							if ((op1 + op2 + cpu_carry) > 255) ca = 1;
-							res_l = (op1 + op2 + cpu_carry);
+							if ((op1 + op2 + { 7'b0000000, cpu_carry }) > 255) ca = 1;
+							res_l = (op1 + op2 + { 7'b0000000, cpu_carry });
 						end
 						6'b00_0110: begin // Sub L2W
 							if ((op1 - op2) == 0) ze = 1;
