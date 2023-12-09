@@ -18,10 +18,10 @@ module cpuy(
 
 	// TODO: Port cfg insntruction, and how to read from propper source according to por cfg
 	assign p0out = ports[0];
-	assign p1out = ports[1];
+	assign p1out = ports[1][3:0];
 
 	assign p0cfg = ports_cfg[0];
-	assign p1cfg = ports_cfg[1];
+	assign p1cfg = ports_cfg[1][3:0];
 
 	// Some internal parameters definitions
 	localparam 		RAM_SIZE = 256;
@@ -394,7 +394,7 @@ module cpuy(
 
 						if (destination_ports_config_ucode) begin
 							ports_cfg[0] <= registers[0];
-							ports_cfg[1] <= registers[1];
+							ports_cfg[1] <= registers[1][3:0];
 						end
 
 						if (destination_w_ucode) begin
