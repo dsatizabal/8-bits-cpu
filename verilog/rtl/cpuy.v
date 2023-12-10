@@ -304,7 +304,7 @@ module cpuy(
 						current_operand <= 0;
 					end else begin // Instructions without operands
 						// Ret instruction: bad implementation :S
-						if (data_bus == 8'b0011_1101) begin
+						if (data_bus == 8'b0011_1100) begin
 							// TODO: validate that stack isn't empty and properly handle exception
 							enable_stack <= 1;
 							operation_stack <= 0; // Pop for Ret from call

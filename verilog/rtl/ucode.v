@@ -258,11 +258,11 @@ module ucode (
 			// 8'b0011_1011: begin
 			// end
 
-			8'b0011_1100: begin
+			8'b0011_1100: begin // Ret
 				stack_op = 1;
 				stack_dir = 0;
 			end
-			8'b0011_1101: begin // Ret
+			8'b0011_1101: begin // PortsCfg
 				mov_op = 1;
 				dst_ports_cfg = 1;
 			end
